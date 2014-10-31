@@ -13,6 +13,6 @@
 \contentsline {subsection}{\numberline {3.1.1}Ottenere i profili}{4}{subsection.3.1.1}
 \contentsline {subsection}{\numberline {3.1.2}Profili recuperati}{5}{subsection.3.1.2}
 \contentsline {paragraph}{OSNS presenti}{6}{section*.7}
-\contentsline {section}{\numberline {3.2}Duolingo}{6}{section.3.2}
-\contentsline {section}{\numberline {3.3}Campagna Lays e Twitter}{6}{section.3.3}
-\contentsline {chapter}{\numberline {4}Risultati}{7}{chapter.4}
+\contentsline {section}{\numberline {3.2}Duolingo}{7}{section.3.2}
+\contentsline {section}{\numberline {3.3}Campagna Lays e Twitter}{7}{section.3.3}
+\contentsline {chapter}{\numberline {4}Risultati}{8}{chapter.4}
