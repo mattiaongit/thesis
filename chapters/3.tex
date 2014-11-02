@@ -10,7 +10,7 @@ Prenderemo in considerazione invece quegli aggregatori che permettono di condivi
 Di seguito spiegheremo l'approccio utilizzato al fine di ottenere i profili degli utenti iscritti al servizio e di recuperare da questi le informazioni riguardati i profili dei loro social networks. Alternion non dispone di un servizio per recuperare i dati attraverso un'interfaccia \textit{web (API)}, con richieste e risposte documentate. Dovremo dunque procedere analizzando le pagine web restituite svolgendo un'attività conosciuta come \textit{web scraping}.
 Il \textit{web scraping} o \textit{web data extraction} è una tecnica di estrazioni di dati da pagine web. L'estrazione di dati viene automatizzata attraverso un software che simula un utente umano nell'esplorazione di documenti presenti sulla rete internet. Il software deve quindi implementare il protocollo HTTP, fondamento per la comunicazione di dati per il World Wide Web per recuperare il documento attraverso la rete internet. Questi documenti, tipicamente descritti attraverso un linguaggio di markup, sono pensati per rappresentare un'interfaccia grafica per l'utente. Ottenuto il documento il \textit{web scraper} si occupa di analizzarne i dati strutturati ricercandone quelli di interesse. La pagina non viene interpretata visivamente ma esaminandone il contenuto descritto con il linguaggio di markup, tipicamente HTML. Questa ricerca può essere effettuata con diversi approcci: dal più semplice, seppur potente, \textit{text grepping} combinato con \textit{regular expression matching} o può prevedere un'analisi più strutturata della pagina attraverso una tecnica di \textit{DOM parsing}. Per i nostri scopi utilizzeremo entrambe queste tecniche. Esistono altre tecniche e metodologie per eseguire \textit{web scraping}, ma i dettagli esulano dallo scopo di questa tesi.
 \subsection{Ottenere i profili}
-Siamo interessanti a ottenere un considerevole numero di profili di utenti che utilizzano l'aggregatore in analisi. Alternion non prevede una funzionalità per mostrare l'elenco completo dei profili iscritti al proprio servizio. Permette invece di reperirne un sotto insieme di questo attraverso una funzionalità di ricerca, divisibile in due classi: la ricerca parametrizzabile secondo alcuni criteri o la presentazione casuale di profili. La prima permette di interrogare il sistema per estrarne i profili corrispondenti ad alcuni parametri di ricerca come Nome, Sesso, Età, Paese di provenienza, Educazione, Interessi, etc La seconda funzionalità consente di ottenere ad ogni richiesta un profilo selezionato casualmente.\footnote{Più probabilmente, pseudo-casualmente!} Ho deciso di accantonare questa seconda via per due ragioni. La selezione casuale potrebbe potenzialmente portare a richiedere più volte lo stesso profilo, dipendentemente dalla bontà (che non è stata testata) della casualità con cui il profilo viene estratto. Vogliamo inoltre limitare l'estrazione di profili non appartenenti a persone fisiche: alcuni profili presenti fanno infatti riferimento a prodotti o società e aziende. Concludo di optare per la ricerca parametrizzata, in particolare, la ricerca per nome. Come lista di parametri per l'interrogazione del sistema useremo una lista di nomi propri \footnote{Lista reperita da census.gov}, formata da 4275 nomi femminili e 1219 maschili. Utilizzando strumenti messi a disposizione da Google\footnote{Google Chrome DevTools} per analizzanre i pacchetti HTTP scambiati tra il server di Alternion e il client Google Chrome, viene identificata la richiesta HTTP da eseguire per interrogare il server per farsi restituire la pagina web contenente la lista di utenti corrispondenti al parametro di ricerca. Eseguiremo quindi una richiesta per ogni nome presente nelle nostre liste di nomi. Da questa, tramite tecniche di scraping descritte precedentemente, estrapoliamo per ogni utente l'\textit{URL} idendificativo della risorsa. Una volta collezionati tutti gli URL, dove ogni indirizzo corrisponde a un utente di Alternion, potremo recuperare la pagina profilo di questi utenti e cercare al suo interno le informazioni riguardanti i loro social networks. Per la persistenza dei dati useremo MongoDB, un database NoSQL document-oriented, che utilizza JSON come data model.
+Siamo interessanti a ottenere un considerevole numero di profili di utenti che utilizzano l'aggregatore in analisi. Alternion non prevede una funzionalità per mostrare l'elenco completo dei profili iscritti al proprio servizio. Permette invece di reperirne un sotto insieme di questo attraverso una funzionalità di ricerca, divisibile in due classi: la ricerca parametrizzabile secondo alcuni criteri o la presentazione casuale di profili. La prima permette di interrogare il sistema per estrarne i profili corrispondenti ad alcuni parametri di ricerca come Nome, Sesso, Età, Paese di provenienza, Educazione, Interessi, etc La seconda funzionalità consente di ottenere ad ogni richiesta un profilo selezionato casualmente.\footnote{Più probabilmente, pseudo-casualmente!} Ho deciso di accantonare questa seconda via per due ragioni. La selezione casuale potrebbe potenzialmente portare a richiedere più volte lo stesso profilo, dipendentemente dalla bontà (che non è stata testata) della casualità con cui il profilo viene estratto. Vogliamo inoltre limitare l'estrazione di profili non appartenenti a persone fisiche: alcuni profili presenti fanno infatti riferimento a prodotti o società e aziende. Concludo di optare per la ricerca parametrizzata, in particolare, la ricerca per nome. Come lista di parametri per l'interrogazione del sistema useremo una lista di nomi propri \footnote{Lista reperita da census.gov}, formata da 4275 nomi femminili e 1219 maschili. Utilizzando strumenti messi a disposizione da Google\footnote{Google Chrome DevTools} per analizzarne i pacchetti HTTP scambiati tra il server di Alternion e il client Google Chrome, viene identificata la richiesta HTTP da eseguire per interrogare il server per farsi restituire la pagina web contenente la lista di utenti corrispondenti al parametro di ricerca. Eseguiremo quindi una richiesta per ogni nome presente nelle nostre liste di nomi. Da questa, tramite tecniche di scraping descritte precedentemente, estrapoliamo per ogni utente l'\textit{URL} idendificativo della risorsa. Una volta collezionati tutti gli URL, dove ogni indirizzo corrisponde a un utente di Alternion, potremo recuperare la pagina profilo di questi utenti e cercare al suo interno le informazioni riguardanti i loro social networks. Per la persistenza dei dati useremo MongoDB, un database NoSQL document-oriented, che utilizza JSON come data model.
 \subsection{Profili recuperati}
 Sono stati recuperati 15341 profili di Alternion, di cui 11274 presentano almeno due profili di social networks. Il numero di profili non è ingente, in quanto la funzionalità ricerca permette di recuperare un massimo di 30 profili per richiesta, ad esempio solo trenta profili delle persone che si chiamano `Anna'. Ad ogni modo si è notato che è possibile scalare, se non verticalmente per numero di users, orizzontalmente per numero di profili per users. Ogni utente ha in media $\sim$4,6 OSNS collegati, distribuiti tra un totale di 168 online social network services diversi presenti. Possiamo dunque espandere il numero di coppie di usernames secondo una combinazione semplice di \textit{n} elementi di classe \textit{k}, dove \textit{n} = 2 (coppie) e \textit{k} il numero di classi di OSN distinti. Ad esempio, un profilo \textit{P} ha aggreagato 3 OSNs \{Facebook, Twitter, Instagram \} e presenta quindi uno username \textit{u} per ogni profilo
 \textit{U} = \{u\textsubscript{Alternion}, u\textsubscript{Facebook}, u\textsubscript{Twitter}, u\textsubscript{Instagram}\}. I sottoinsiemi di cardinalità 2 dell'insieme \textit{U} sono:
@@ -30,15 +30,89 @@ che puó essere scritto usando il fattoriale come
 \begin{gather*}
   \frac{n!}{k!(n-k)!}
 \end{gather*}
-dove \textit{k} = 2 (coppie) e \textit{n} = 168, quindi 14028 coppie di social network distinte. Solamente 5855 di queste peró presentano almeno una coppia di username al suo interno. Concludendo, applicando la combinazione a 2 elementi per ogni profilo nel nostro dataset, otteniamo $\sim$170000 coppie di usernames. Con una media di $\sim$29 coppie di usernae per classe.
+dove \textit{k} = 2 (coppie) e \textit{n} = 168, quindi 14028 coppie di social network distinte. Solamente 5855 di queste peró presentano almeno una coppia di username al suo interno. Concludendo, applicando la combinazione a 2 elementi per ogni profilo nel nostro dataset, otteniamo $\sim$170000 coppie di usernames. Con una media di $\sim$29 coppie di username per classe.
 \paragraph{OSNS presenti}
 \{100zakladokru, 43 Things, 500px, ActiveRain, All Consuming, Alternion, Amazon, Ameba, Aminus3, Answerbag, Aol Answers, AudioBoo, Bambuser, Bebo, Blipfm, Blipfoto, Bliptv, Blog Talk Radio, Blogger, Blogmarks, Blogru, Blogs@MailRu, Bordom, BuzzFeed, Buzznet, CafeMom, CiteULike, Connotea, Current, DailyStrength, Dailymotion, Delicious, DeviantART, Diigo, Disqus, Docstoc, Douban, Dreamwidth, Dribbble, EmpoweHER, Etsy, Eventbrite, FFFFound!, Facebook, Fancy, Flickr, FoodFeed, Formspring, Fotolog, Foursquare, FunnyOrDie, GamerDNA, Gamespot, Gather, GitHub, Gizmodo, Goodreads, Google Reader, Google+, Habrahabr, Hatena Bookmark, Hatena Diary, Hatena Haiku, HubPages, Hyves, Identica, Imgly, Instagram, Instructables, IntenseDebate, Ipernity, Issuu, Jalbum, JamBase, Judy"s Book, Lafango, Lastfm, LibraryThing, LinkedIn, Listal, Lookbooknu, Magma, MeasuredUp, Memoriru, Meneame, MetaFilter, Metacafe, Mister Wong, Moblog, MobyPicture, Multiply, Netlog, News2ru, Newsvine, NowPublic, Pandora, Panoramio, Photobucket, Photocase, Photosightru, Picasa, Pikchur, Pinboard, Pinterest, Plancast, Plixi, Plurk, Polyvore, Posterous, Qik, Qype, RPodru, Raptr, RedBubble, RedGage, Reddit, Rooftop Comedy, SAPO Fotos, SAPO Videos, Server Fault, Six Groups,Skyrock, SlideShare, SmugMug, Soupio, SparkPeople, Squidoo, Stack Overflow, StumbleUpon, Super User, Tabulas, Technorati, ThisNext, Threadless, TravelPod, Trilulilu, Tripit, Trulia, Tumblr, Tvigleru, Twitgoo, Twitpic, Twitrpix, Twitter, UserVoice, Viddler, VideoQip, Vimeo, Wattv, We Heart It, WordPress, Worth1000, Xanga, Yahoo! Answers, YouTube, Zazzle, Zenfolio, Zillow, Zorpia, aNobii, authorSTREAM, Facebook, gdgt, I use this, iPadio, iReport, Visualizeus, wePapers\}
 
-\begin{figure}[ht!]
+\subsection{Distribuzione similaritá usernames}
+Siamo interessati a confrontare coppie di usernames, per tentare di ricollegarle alla stessa entitá. Il caso piú semplice che potrebbe presentarsi\footnote{se non si considerano i casi di omonimia} é la corrispondenza esatta tra i due usernames. Indagheremo quindi questa proprietá sul nostro dataset acquisito. Oltre a verificarne la corrispondenza esatta, ovvero che le due stringhe che formano gli username presentino gli stessi caratteri nello stesso ordine, faremo uso di alcune metriche di similaritá su stringhe. Queste sono tecniche per quantificare la dissimilaritá tra due stringhe. In particolare utilizzeremo la \textit{distanza di Levensthein}, una metrica per misurare la differenza tra due sequenze, e \textit{l'indice di Jaccard}, un indice statistico utilizzato per comparare la similaritá e la diversitá di insiemi campionari.
+
+\paragraph{Distanze}
+Riportiamo le statistiche su le distanze calcolate su le classi aventi almeno 1000 coppie di username (29 classi, con un totale di 56687 coppie di usernames ) e su i dati globali.
+\newline
+
+\begin{tabular}{ r|c|c| }
+\multicolumn{1}{r}{}
+ &  \multicolumn{1}{c}{Mean Levensthein distance}
+ & \multicolumn{1}{c}{Mean Jaccard Index} \\
+\cline{2-3}
+Popular classes & 6.2295 & 0.3277\\
+\cline{2-3}
+All dataset & 5.8159 & 0.3685 \\
+\cline{2-3}
+\end{tabular}
+
+\paragraph{Match Esatti} Qui riportiamo le statistiche su i match esatti, dove le distanze di Levensthein e l'indice di Jaccard assume il valore 0.
+\newline
+
+\begin{tabular}{ r|c|c| }
+\multicolumn{1}{r}{}
+ &  \multicolumn{1}{c}{Levensthein distance = 0}
+ & \multicolumn{1}{c}{Jaccard Index = 0 } \\
+\cline{2-3}
+Popular classes & 31.79\% & 34.03\% \\
+\cline{2-3}
+All dataset & 27.80\% & 29.16\% \\
+\cline{2-3}
+\end{tabular}
+
+\begin{figure}[bp!]
 \centering
-\includegraphics[width=90mm]{chapters/distanceplot/Google+-Twitter.png}
+\includegraphics[width=110mm]{chapters/distanceplot/levenshtein_distribution.png}
 \caption{Distribuzione distanza di Levensthein tra coppie di usernames  \label{overflow}}
 \end{figure}
 
-\section{Duolingo}
-\section{Campagna Lays e Twitter}
+\begin{figure}[bp!]
+\centering
+\includegraphics[width=110mm]{chapters/distanceplot/jaccard_distribution.png}
+\caption{Distribuzione indice di Jaccard tra coppie di usernames \label{overflow}}
+\end{figure}
+
+\newpage
+
+Osservando i dati rappresentati con un istogramma notiamo un pattern a \textit{doppio picco} che ritroviamo sia nel grafico delle distanze di Levensthein che dell'indice di Jaccard, su dati globali e anche analizzando classi prese singolarmente.
+
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{chapters/distanceplot/Google+-Pinterest.png}
+  \caption{Google+ Pinterest}
+  \label{fig:sfig1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{chapters/distanceplot/Tumblr-Twitter.png}
+  \caption{Tumblr Twitter}
+  \label{fig:sfig2}
+\end{subfigure}
+\caption{Pattern a doppio picco, anche su classe singola}
+\label{fig:fig}
+\end{figure}
+
+
+
+
+Plottando le distanze di coppie di username casuali, non appartenenti alla stessa persona, ritroviamo invece una piú prevedibile distribuzione normale (Gaussiana).
+
+\begin{figure}[bp!]
+\centering
+\includegraphics[width=110mm]{chapters/distanceplot/random_levenshtein_distribution.png}
+\caption{Distribuzione distanza di Levensthein tra coppie random  \label{overflow}}
+\end{figure}
+
+\begin{figure}[bp!]
+\centering
+\includegraphics[width=110mm]{chapters/distanceplot/random_jaccard_distribution.png}
+\caption{Distribuzione indice di Jaccard tra coppie random \label{overflow}}
+\end{figure}
