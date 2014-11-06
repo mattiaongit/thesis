@@ -2,7 +2,7 @@
 \label{cap2}
 Gli individui mostrano spesso pattern comportamentali nella scelta dei loro usernames. Questi pattern, risultanti in ridondanza di informazione, possono essere utili per identificare individui su diversi social networks.
 I soggetti potrebbero evitare queste ridondanze selezionando usernames in modo che risultino completamente diversi dai loro altri usernames. In questa maniera gli usernames risulterebbero essere talmente differenti che dato uno username, nessuna informazione riguardante gli altri usernames potrebbe essere estratta.
-Idealmente per raggiungere questo stato di indipendenza, l'individuo dovrebbe scegliere uno username che presenti entropia massima. Ovvero uno username composto da una lunga sequenza di caratteri, lunga quanto il massimo consentito dal sistema, senza ridondanze - una sequenza di caratteri completamente casuale.
+Idealmente per raggiungere questo stato di indipendenza tra usernames, l'individuo dovrebbe scegliere uno username che presenti entropia massima. Ovvero uno username composto da una lunga sequenza di caratteri, lunga quanto il massimo consentito dal sistema, senza ridondanze: una sequenza di caratteri completamente casuale.
 Sfortunatamente, tutti questi requisiti non vengono incontro alle abilità umane. Gli esseri umani hanno difficoltà a memorizzare lunghe sequenze, con la possibilità della memoria a breve termine di ricordare 7$\pm$2 elementi. Queste limitazioni risultano condurre gli individui a selezionare generlamente usernames \textit{non lunghi}, \textit{non casuali} e che presentano \textit{abbondante ridondanza}.
 Queste proprietà possono essere catturate adottando features specifiche.
 
@@ -17,5 +17,29 @@ Discuteremo dei comportamenti di ognuna di queste categorie elencate e delle fea
 
 
 \section{Pattern dovuti a limitazioni umane}
-\paragraph{Fattori esogeni}
+
+\paragraph{definizione notazione}
+Ci riferiremo a Individuo, username, prior usernames, candidate username.
+
+\paragraph{Username identici}
+Uno studio condotto da Zafarani dimostra che il 59\% degli individui preferisce usare lo stesso username reiteratamente, principalmente per facilitá nel ricordarlo.[citazione]
+
+Quindi se un candidate username \textit{c} compare tra i prior usernames \textit{U}, vi é una forte indicazione che che potrebbe essere associato allo stesso individuo a cui sono associati i prior usernames. Considereremo dunque di utilizzare il numero di candidate username presenti tra i prior usernames come feature.
+
+\paragraph{Username Length Likelihood}
+Allo stesso modo, gli utenti hanno tipicamente un insieme di potenziali usernames dal quale ne estraggono uno quando richiesto di crearne uno nuovo. Questi usernames hanno differenti lunghezze e dunque é possibile calcolarne una distribuzione. Consideriamo \textit{l\textsubscript{c}} la lunghezza del candidate username e \textit{l\textsubscript{u}} la lunghezza di uno username \textit{u} $\in$ \textit{U}.
+Assumiamo che per ogni nuovo username deciso di creare é probabile il verificarsi di\\
+\centerline{$\min$\textit{l\textsubscript{u}} $\leq$ \textit{l\textsubscript{c}} $\leq$ $\max$\textit{l}\textsubscript{u}}
+Ad esempio se un individuo é solito a scegliere username di lunghezza 8 o 9 caratteri, é improbabile che questo consideri di crearne uno con lunghezze minori o maggiori.
+Considereremo quindi le lunghezza del candidate username e la distribuzione delle lunghezze dei prior usernames come features. La distribuzione verrá rappresentata da un numero fisso di features, descrivendola come\\
+\centerline{($\mathbb{E}$[\textit{l\textsubscript{u}}],$\sigma$[\textit{l\textsubscript{u}}], med[\textit{l\textsubscript{u}}],$\min$\textit{l\textsubscript{u}},$\max$\textit{l\textsubscript{u}})}
+
+\paragraph{Unique username creation Likelihood}
+
+\paragraph{Limited Vocabulary}
+
+\paragraph{Limited Alphabet}
+
+
+\section{Fattori esogeni}
 \section{Fattori endogeni}
