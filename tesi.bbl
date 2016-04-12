@@ -1,0 +1,74 @@
+\begin{thebibliography}{10}
+
+\bibitem{fbinsights}
+Facebook~For Business.
+\newblock {Audience Insights}.
+\newblock \url{https://www.facebook.com/business/news/audience-insights}, 2014.
+
+\bibitem{thomcov}
+Thomas~M. Cover and Joy~A. Thomas.
+\newblock {\em Elements of information theory}.
+\newblock 2012.
+
+\bibitem{crammer06}
+Koby Crammer, Ofer Dekel, Joseph Keshet, Shai Shalev-Shwartz, and Yoram Singer.
+\newblock Online passive-aggressive algorithms.
+\newblock {\em The Journal of Machine Learning Research}, 7:551--585, 2006.
+
+\bibitem{doctorow}
+C.~Doctorow.
+\newblock {Preliminary Analysis of LinkedIn User Passwords}.
+\newblock \url{http://bit.ly/1zetKsF}, June 2012.
+
+\bibitem{gardner1984learning}
+William~A. Gardner.
+\newblock Learning characteristics of stochastic-gradient-descent algorithms: A
+  general study, analysis, and critique.
+\newblock {\em Signal Processing}, 6(2):113--133, 1984.
+
+\bibitem{miller1956magical}
+George~A Miller.
+\newblock The magical number seven, plus or minus two: some limits on our
+  capacity for processing information.
+\newblock {\em Psychological review}, 63(2):81, 1956.
+
+\bibitem{perito11}
+Daniele Perito, Claude Castelluccia, Mohamed~Ali Kaafar, and Pere Manils.
+\newblock How unique and traceable are usernames?
+\newblock In {\em Privacy Enhancing Technologies}, pages 1--17. Springer, 2011.
+
+\bibitem{keylayout}
+Wikipedia.
+\newblock {Keyboard layouts}.
+\newblock \url{http://bitly.com/kXso}.
+
+\bibitem{touchtyping}
+Wikipedia.
+\newblock {Touchtyping}.
+\newblock \url{http://bit.ly/1FB5GEA}.
+
+\bibitem{openidtrend}
+Build With.
+\newblock {Web and Internet Technology Usage Statistics}.
+\newblock \url{http://trends.builtwith.com/docinfo/OpenID}, November 2014.
+
+\bibitem{zafarani09}
+Reza Zafarani and Huan Liu.
+\newblock Connecting corresponding identities across communities.
+\newblock In {\em ICWSM}, 2009.
+
+\bibitem{zafarani13}
+Reza Zafarani and Huan Liu.
+\newblock Connecting users across social media sites: a behavioral-modeling
+  approach.
+\newblock In {\em Proceedings of the 19th ACM SIGKDD international conference
+  on Knowledge Discovery and Data mining}, pages 41--49. ACM, 2013.
+
+\bibitem{zhang2004solving}
+Tong Zhang.
+\newblock Solving large scale linear prediction problems using stochastic
+  gradient descent algorithms.
+\newblock In {\em Proceedings of the twenty-first international conference on
+  Machine learning}, page 116. ACM, 2004.
+
+\end{thebibliography}

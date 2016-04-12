@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2014)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: tesi.aux
+The style file: plain.bst
+Database file #1: bibliography.bib
+Warning--empty publisher in thomcov
+You've used 13 entries,
+            2118 wiz_defined-function locations,
+            569 strings with 5758 characters,
+and the built_in function-call counts, 3758 in all, are:
+= -- 367
+> -- 146
+< -- 3
++ -- 60
+- -- 46
+* -- 202
+:= -- 617
+add.period$ -- 42
+call.type$ -- 13
+change.case$ -- 61
+chr.to.int$ -- 0
+cite$ -- 14
+duplicate$ -- 155
+empty$ -- 342
+format.name$ -- 46
+if$ -- 817
+int.to.chr$ -- 0
+int.to.str$ -- 13
+missing$ -- 9
+newline$ -- 68
+num.names$ -- 26
+pop$ -- 95
+preamble$ -- 1
+purify$ -- 49
+quote$ -- 0
+skip$ -- 114
+stack$ -- 0
+substring$ -- 171
+swap$ -- 36
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 50
+warning$ -- 1
+while$ -- 38
+width$ -- 15
+write$ -- 138
+(There was 1 warning)

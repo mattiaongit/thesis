@@ -1,14 +1,33 @@
-\BOOKMARK [0][-]{chapter*.1}{}{}% 1
-\BOOKMARK [0][-]{chapter*.2}{Prefazione}{}% 2
-\BOOKMARK [0][-]{chapter*.4}{Ringraziamenti}{}% 3
-\BOOKMARK [0][-]{chapter.1}{Introduzione}{}% 4
-\BOOKMARK [0][-]{chapter.2}{Pattern comportamentali e costruzione di features}{}% 5
-\BOOKMARK [1][-]{section.2.1}{Pattern dovuti a limitazioni umane}{chapter.2}% 6
-\BOOKMARK [1][-]{section.2.2}{Fattori esogeni}{chapter.2}% 7
+\BOOKMARK [0][-]{chapter*.2}{Ringraziamenti}{}% 1
+\BOOKMARK [0][-]{chapter.1}{Introduzione}{}% 2
+\BOOKMARK [0][-]{chapter.2}{Pattern comportamentali e costruzione di features}{}% 3
+\BOOKMARK [1][-]{section.2.1}{Pattern dovuti a limitazioni umane}{chapter.2}% 4
+\BOOKMARK [1][-]{section.2.2}{Fattori esogeni}{chapter.2}% 5
+\BOOKMARK [2][-]{subsection.2.2.1}{Pattern di battitura}{section.2.2}% 6
+\BOOKMARK [2][-]{subsection.2.2.2}{Pattern linguistici}{section.2.2}% 7
 \BOOKMARK [1][-]{section.2.3}{Fattori endogeni}{chapter.2}% 8
-\BOOKMARK [0][-]{chapter.3}{Collezione dataset}{}% 9
-\BOOKMARK [1][-]{section.3.1}{Scraping Alternion}{chapter.3}% 10
-\BOOKMARK [2][-]{subsection.3.1.1}{Ottenere i profili}{section.3.1}% 11
-\BOOKMARK [2][-]{subsection.3.1.2}{Profili recuperati}{section.3.1}% 12
-\BOOKMARK [2][-]{subsection.3.1.3}{Distribuzione della similarit\341 degli usernames}{section.3.1}% 13
-\BOOKMARK [0][-]{chapter.4}{Risultati}{}% 14
+\BOOKMARK [2][-]{subsection.2.3.1}{Attributi personali}{section.2.3}% 9
+\BOOKMARK [2][-]{subsection.2.3.2}{Casualit\340}{section.2.3}% 10
+\BOOKMARK [2][-]{subsection.2.3.3}{Usanze}{section.2.3}% 11
+\BOOKMARK [0][-]{chapter.3}{Collezione del dataset}{}% 12
+\BOOKMARK [1][-]{section.3.1}{Scraping di Alternion}{chapter.3}% 13
+\BOOKMARK [2][-]{subsection.3.1.1}{Ottenere i profili}{section.3.1}% 14
+\BOOKMARK [2][-]{subsection.3.1.2}{Profili recuperati}{section.3.1}% 15
+\BOOKMARK [2][-]{subsection.3.1.3}{Distribuzione della similarit\340 degli username}{section.3.1}% 16
+\BOOKMARK [0][-]{chapter.4}{Apprendimento e Risultati}{}% 17
+\BOOKMARK [1][-]{section.4.1}{Preprocessamento dei dati}{chapter.4}% 18
+\BOOKMARK [2][-]{subsection.4.1.1}{Estrazione di feature}{section.4.1}% 19
+\BOOKMARK [2][-]{subsection.4.1.2}{Sampling}{section.4.1}% 20
+\BOOKMARK [2][-]{subsection.4.1.3}{Normalizzazione dei dati}{section.4.1}% 21
+\BOOKMARK [1][-]{section.4.2}{Addestramento del classificatore}{chapter.4}% 22
+\BOOKMARK [2][-]{subsection.4.2.1}{Variare il numero di priors username}{section.4.2}% 23
+\BOOKMARK [2][-]{subsection.4.2.2}{Variare le classi di social networks}{section.4.2}% 24
+\BOOKMARK [2][-]{subsection.4.2.3}{Variare il numero di features - Features selection}{section.4.2}% 25
+\BOOKMARK [1][-]{section.4.3}{Modelli di classificazione e risultati}{chapter.4}% 26
+\BOOKMARK [2][-]{subsection.4.3.1}{Classificatori binari online}{section.4.3}% 27
+\BOOKMARK [1][-]{section.4.4}{Risultati}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.5}{Comparazione con il lavoro svolto da Zafarani et al}{chapter.4}% 29
+\BOOKMARK [0][-]{chapter.5}{Conclusioni}{}% 30
+\BOOKMARK [1][-]{section.5.1}{Lavoro svolto}{chapter.5}% 31
+\BOOKMARK [1][-]{section.5.2}{Risultati}{chapter.5}% 32
+\BOOKMARK [1][-]{section.5.3}{Sviluppi futuri}{chapter.5}% 33
